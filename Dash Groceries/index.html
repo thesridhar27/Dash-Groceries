@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dash Groceries</title>
+  <link rel="stylesheet" href="CSS/stylesheet.css">
+</head>
+<body>
+
+  <div class="nav-wrapper">
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Order Online</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="image-holder">
+    <img class="background-img" src="images/bg-image.png" style="width:100%;">
+    <h1 id="caption-1">GROCERY SHOPPING DONE ONLINE</h1>
+  </div>
+
+  <h1 id="pop-cat">POPULAR CATEGORIES</h1>
+  <hr style="width: 80%; margin: auto;">
+
+  <div class="featured-warpper">
+
+    <div class="product-container">
+      <p class="cat-text">Dairy Products</p>
+      <img src="images/dairy.png" alt="Dairy">
+      <div class="btn-container">
+        <button class="view-more-btn" type="button">VIEW MORE</button>
+      </div>
+    </div>
+
+    <div class="product-container">
+      <p class="cat-text">Cold Meat</p>
+      <img src="images/cold-meat.png" alt="Meat">
+      <div class="btn-container">
+        <button class="view-more-btn" type="button">VIEW MORE</button>
+      </div>
+    </div>
+
+    <div class="product-container">
+      <p class="cat-text">Fruit and Veg</p>
+      <img src="images/fruit-veg.png" alt="Fruit">
+      <div class="btn-container">
+        <button class="view-more-btn" type="button">VIEW MORE</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="social-media-container">
+    <div id="facebook-icon-container"><img src="images/icons/facebook-icon.png"></div>
+    <div id="twitter-icon-container"><img src="images/icons/twitter-icon.png"></div>
+    <div id="insta-icon-container"><img src="images/icons/insta-icon.png"></div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-head-container">
+      <img id="email-icon" src="images/email-icon.png">
+      <span id="contact-us-label">Contact Us</span>
+    </div>
+
+    <form action="">
+      <label class="form-item" for="fname">First Name</label><br>
+      <input type="text" id="fname" name="firstname" placeholder="your first name"><br>
+
+      <label class="form-item" for="lname">Last Name</label><br>
+      <input type="text" id="lname" name="lastname" placeholder="your last name"><br>
+
+      <label class="form-item" for="subject">Subject</label><br>
+      <textarea id="subject" name="subject" placeholder="How can we help?"></textarea><br>
+
+      <input type="submit" id="submit-btn" value="Submit">
+    </form>
+  </div>
+
+</body>
+</html>
