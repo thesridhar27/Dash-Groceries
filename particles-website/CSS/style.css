@@ -1,0 +1,73 @@
+body{
+margin:0;
+font-family:Arial;
+color:white;
+text-align:center;
+}
+
+/* PARTICLES BACKGROUND */
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(to right,#2c5364,#203a43,#0f2027);
+z-index:-1;
+}
+
+/* HOME PAGE */
+
+.content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+h1{
+font-size:50px;
+margin-bottom:10px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:6px;
+background:#00c3ff;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* EXPLORE PAGE */
+
+.explore-bg{
+background:linear-gradient(to right,#141e30,#243b55);
+height:100vh;
+}
+
+.explore-page{
+padding:60px;
+}
+
+.features{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:40px;
+flex-wrap:wrap;
+}
+
+.feature-card{
+background:rgba(255,255,255,0.15);
+padding:20px;
+border-radius:10px;
+width:220px;
+backdrop-filter:blur(10px);
+}
+
