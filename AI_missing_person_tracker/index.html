@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindHome — AI Missing Person Tracker</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav>
+  <div class="logo">
+    <span class="logo-dot"></span> FindHome
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active"   onclick="setTab(this, 'browse')">Browse Cases</button>
+    <button class="nav-link"          onclick="setTab(this, 'map')">Map View</button>
+    <button class="nav-link"          onclick="setTab(this, 'resolved')">Resolved</button>
+    <button class="btn-report"        onclick="openModal('report-modal')">+ Report Missing</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge"><span class="pulse"></span> AI-Powered Search Active</div>
+      <h1>Help bring people<br><span>back home.</span></h1>
+      <p class="hero-sub">
+        An AI-assisted platform to report, search, and track missing persons.
+        Every case matters. Every lead counts.
+      </p>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">2,847</div>
+          <div class="stat-label">Active Cases</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num green">1,209</div>
+          <div class="stat-label">Reunited</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">94%</div>
+          <div class="stat-label">AI Match Accuracy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI SMART SEARCH CARD -->
+    <div class="ai-card">
+      <div class="ai-card-label"><span class="ai-icon">✦</span> AI Smart Search</div>
+      <div class="ai-input-wrap">
+        <textarea
+          class="ai-input"
+          id="ai-query"
+          placeholder="Describe what you know — appearance, location, circumstances, clothing, time last seen…">
+        </textarea>
+      </div>
+      <button class="ai-btn" onclick="runAISearch()">
+        <span>✦</span> Search with AI
+      </button>
+      <div class="ai-hints">
+        <span class="hint-chip" onclick="fillHint(this)">Long dark hair, teenage girl</span>
+        <span class="hint-chip" onclick="fillHint(this)">Elderly man, blue jacket</span>
+        <span class="hint-chip" onclick="fillHint(this)">Seen near airport March 15</span>
+        <span class="hint-chip" onclick="fillHint(this)">Missing after flood</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI RESULT PANEL -->
+  <div class="ai-result" id="ai-result">
+    <div class="ai-result-header">
+      <span class="ai-result-icon">✦</span>
+      <div class="ai-result-title">AI Analysis Complete</div>
+    </div>
+    <div class="ai-result-body"   id="ai-result-body"></div>
+    <div class="ai-result-matches" id="ai-result-matches"></div>
+  </div>
+
+  <!-- FILTERS BAR -->
+  <div class="filters-bar">
+    <span class="filter-label">Filter</span>
+
+    <select class="filter-select" onchange="applyFilters()">
+      <option>All Statuses</option>
+      <option>Missing</option>
+      <option>Active Search</option>
+      <option>Found</option>
+    </select>
+
+    <select class="filter-select" onchange="applyFilters()">
+      <option>All Ages</option>
+      <option>Child (0–12)</option>
+      <option>Teen (13–17)</option>
+      <option>Adult (18–60)</option>
+      <option>Senior (60+)</option>
+    </select>
+
+    <select class="filter-select" onchange="applyFilters()">
+      <option>All Regions</option>
+      <option>North</option>
+      <option>South</option>
+      <option>East</option>
+      <option>West</option>
+    </select>
+
+    <div class="filter-divider"></div>
+
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input
+        class="search-input"
+        type="text"
+        placeholder="Search by name, location…"
+        oninput="applyFilters()">
+    </div>
+
+    <div class="result-count" id="result-count"><strong>–</strong> cases</div>
+  </div>
+
+  <!-- CASES GRID -->
+  <div class="section-header">
+    <div class="section-title">Recent Cases</div>
+    <a href="#" class="view-all">View all →</a>
+  </div>
+
+  <div class="cards-grid" id="cases-grid">
+    <!-- Populated by app.js → renderCards() -->
+  </div>
+
+</div><!-- /container -->
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<div class="container">
+  <footer>
+    <div>© 2026 FindHome. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Emergency: 112</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════
+     REPORT MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="report-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="section-title">Report a Missing Person</div>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+          All information is kept confidential and shared with authorities.
+        </p>
+      </div>
+      <button class="modal-close" onclick="closeModal('report-modal')">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" placeholder="e.g. Sarah">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" placeholder="e.g. Johnson">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <input class="form-input" type="number" placeholder="e.g. 24">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <select class="form-select">
+            <option>Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Non-binary</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Last Seen Location</label>
+          <input class="form-input" type="text" placeholder="City, area or address">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Date Last Seen</label>
+          <input class="form-input" type="date">
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Physical Description</label>
+          <textarea class="form-textarea"
+            placeholder="Height, weight, hair color, eye color, distinguishing features, clothing last worn…">
+          </textarea>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Additional Details</label>
+          <textarea class="form-textarea"
+            placeholder="Circumstances of disappearance, known contacts, any other relevant information…">
+          </textarea>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Upload Photo</label>
+          <div class="upload-zone"
+            onclick="showToast('📎 Photo upload ready in full version')">
+            <div class="upload-icon">📷</div>
+            <div class="upload-text">
+              Click to upload or drag and drop a recent photo<br>
+              <span style="font-size:11px;opacity:0.7">JPG, PNG up to 10MB</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /form-grid -->
+
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeModal('report-modal')">Cancel</button>
+        <button class="btn-primary"   onclick="submitReport()">Submit Report</button>
+      </div>
+    </div><!-- /modal-body -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DETAIL MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="section-title" id="detail-title">Case Details</div>
+      <button class="modal-close" onclick="closeModal('detail-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="detail-body">
+      <!-- Populated by app.js → openDetail() -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TOAST NOTIFICATION
+════════════════════════════════════════ -->
+<div class="toast" id="toast">
+  <span id="toast-icon">✓</span>
+  <span id="toast-msg">Done</span>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
+<script src="app.js"></script>
+
+</body>
+</html>
